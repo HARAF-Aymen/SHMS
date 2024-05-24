@@ -62,6 +62,13 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="RoomDetails"
+        options={{
+          title: 'Room Details',
+          tabBarButton: () => null
+        }}
+      />
     </Tabs>
   );
 }

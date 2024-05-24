@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Button, useTheme } from 'react-native-paper';
+
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Button, Text, useTheme } from 'react-native-paper';
 import PieChart from 'react-native-pie-chart';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -10,14 +11,47 @@ export default function Dashboard() {
   const series = [50, 30, 20];
   const sliceColor = ['#600080', '#9900cc', '#c61aff'];
 
+  const [selectedButton, setSelectedButton] = useState('');
+  const [selectedTab, setSelectedTab] = useState('Monthly');
+
+  const handleButtonPress = (button) => {
+    setSelectedButton(button);
+  };
+
+  const handleTabPress = (tab) => {
+    setSelectedTab(tab);
+  };
+
+  const buttonStyle = (button) => {
+    return selectedButton === button
+      ? [styles.button, { backgroundColor: '#9900cc' }]
+      : styles.button;
+  };
+
+  const tabButtonStyle = (tab) => {
+    return selectedTab === tab
+      ? [styles.tabButton, { backgroundColor: '#9900cc' }]
+      : styles.tabButton;
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Dashboard</Text>
       <View style={styles.buttonContainer}>
-        <Button icon="flash" mode="contained" style={styles.buttonLeft}>
+        <Button
+          icon="flash"
+          mode={selectedButton === 'Energy use' ? 'contained' : 'outlined'}
+          style={buttonStyle('Energy use')}
+          onPress={() => handleButtonPress('Energy use')}
+        >
           Energy use
         </Button>
-        <Button icon="currency-usd" mode="outlined" style={styles.buttonRight}>
+        <Button
+          icon="currency-usd"
+          mode={selectedButton === 'Expected bill' ? 'contained' : 'outlined'}
+          style={buttonStyle('Expected bill')}
+          onPress={() => handleButtonPress('Expected bill')}
+        >
           Expected bill
         </Button>
       </View>
@@ -30,13 +64,25 @@ export default function Dashboard() {
         style={styles.chart}
       />
       <View style={styles.tabContainer}>
-        <Button mode="contained" style={styles.tabButton}>
+        <Button
+          mode={selectedTab === 'Monthly' ? 'contained' : 'outlined'}
+          style={tabButtonStyle('Monthly')}
+          onPress={() => handleTabPress('Monthly')}
+        >
           Monthly
         </Button>
-        <Button mode="outlined" style={styles.tabButton}>
+        <Button
+          mode={selectedTab === 'Weekly' ? 'contained' : 'outlined'}
+          style={tabButtonStyle('Weekly')}
+          onPress={() => handleTabPress('Weekly')}
+        >
           Weekly
         </Button>
-        <Button mode="outlined" style={styles.tabButton}>
+        <Button
+          mode={selectedTab === 'Daily' ? 'contained' : 'outlined'}
+          style={tabButtonStyle('Daily')}
+          onPress={() => handleTabPress('Daily')}
+        >
           Daily
         </Button>
       </View>
@@ -74,13 +120,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginVertical: 16,
   },
-  buttonLeft: {
+  button: {
     flex: 1,
-    marginRight: 8,
-  },
-  buttonRight: {
-    flex: 1,
-    marginLeft: 8,
+    marginHorizontal: 8,
   },
   chart: {
     alignSelf: 'center',
