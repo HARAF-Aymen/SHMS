@@ -116,7 +116,50 @@ const rooms = [
     contribution: '34.23 DH',
     icon: 'shower',
   },
+  {
+    name: 'Kitchen',
+    consumption: '60 KWh',
+    contribution: '54.30 DH',
+    icon: 'food-turkey',
+  },
+  {
+    name: 'Dining room',
+    consumption: '35 KWh',
+    contribution: '31.75 DH',
+    icon: 'bowl-mix-outline',
+  },
+  {
+    name: 'Home Office',
+    consumption: '25 KWh',
+    contribution: '22.50 DH',
+    icon: 'desk',
+  },
+  {
+    name: 'Garage',
+    consumption: '20 KWh',
+    contribution: '18.00 DH',
+    icon: 'car',
+  },
+  {
+    name: 'Guest room',
+    consumption: '15 KWh',
+    contribution: '13.50 DH',
+    icon: 'human-greeting-variant',
+  },
+  {
+    name: 'Laundry room',
+    consumption: '28 KWh',
+    contribution: '25.20 DH',
+    icon: 'air-humidifier',
+  },
+  {
+    name: 'Study room',
+    consumption: '12 KWh',
+    contribution: '10.80 DH',
+    icon: 'book-education',
+  },
 ];
+
 
 export default function HomeRooms() {
   const theme = useTheme();
